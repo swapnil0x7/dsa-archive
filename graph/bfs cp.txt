@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define rep(n) for(int i=0;i<n;i++)
+#define endl "\n"
+
+
+void bfs(vector<int> adj[],bool visited[],int i ){
+    visited[i]=true;
+    queue<int> q;
+    q.push(i);
+    
+    while(!q.empty()){
+        
+        int temp = q.front();
+        cout<<temp<<" ";
+        q.pop();
+        
+        for(auto j : adj[temp]){
+            if(!visited[j]){
+                q.push(j);
+                
+            }
+        }
+    }
+}
+
+
+
+
+int main(){
+    int n,e;
+    cin>>n>>e;
+    
+    vector<int> adj[n];
+    int a,b;
+    
+    for(int i=0;i<e;i++){
+        cin>>a>>b;
+        adj[a].push_back(b);
+        
+    }
+    bool visited[n];
+    memset(visited,false,n);
+    for(int i=0;i<n;i++){
+        if(!visited[i]){
+            bfs(adj,visited,i);
+        }
+    }
+}

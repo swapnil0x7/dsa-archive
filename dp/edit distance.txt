@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+#define ll long long int
+
+using namespace std;
+
+int min(int x, int y, int z) 
+{ 
+    return min(min(x, y), z); 
+} 
+int operations(string s1, string s2,int n1,int n2,int dp[20][20]){
+    if(n1==0) return n2;
+    if(n2==0)return n1;
+    if(dp[n1][n2]!=-1) return dp[n1][n2];
+    if(s1[n1-1]==s2[n2-1]) return dp[n1][n2]= operations(s1,s2,n1-1,n2-1,dp);
+    
+    return dp[n1][n2]= 1+min(operations(s1,s2,n1-1,n2,dp),operations(s1,s2,n1,n2-1,dp),operations(s1,s2,n1-1,n2-1,dp));
+}
+
+int main(){
+    
+    string s1="saturday";
+    string s2="sunday";
+    int n1=s1.length();
+    int n2=s2.length();
+    int dp[20][20];
+    memset(dp,-1,sizeof(dp));
+    cout<<operations(s1,s2,n1,n2,dp)<<endl;
+    
+    
+}

@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    string str;
+    cin>>str;
+    string patt;
+    cin>>patt;
+    int n = str.length();
+    int m = patt.length();
+    int flag=0;
+    vector<int> countS(26,0);
+    vector<int> countP(26,0);
+    
+    for(int i=0;i<m;i++){
+        countS[str[i]-'a']++;
+        countP[patt[i]-'a']++;
+    }
+    for(int i=m;i<n;i++){
+        if(countS==countP){
+            flag=1;
+            break;
+        }
+        countS[str[i]-'a']++;
+        countS[str[i-m]-'a']--;
+    }
+    
+    string ans = (flag==1)? "found!":"not found!";
+    cout<<ans<<endl;
+    
+    
+}

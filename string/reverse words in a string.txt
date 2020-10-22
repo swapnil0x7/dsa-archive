@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    string s; cin>>s;
+    int prev=0,curr=0;
+    int n = s.length();
+    for(int curr=0;curr<n;curr++){
+        if(s[curr]=='.'){
+            reverse(s.begin()+prev,s.begin()+curr);
+            prev = curr+1;
+        }
+    }
+    reverse(s.begin()+prev, s.end());
+    reverse(s.begin(),s.end());
+    cout<<s<<endl;
+}
+    

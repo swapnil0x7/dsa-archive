@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main(){
+    int n; cin>>n;
+    int e; cin>>e;
+    
+    vector<int>adj[n+1];
+    
+    for(int i=0;i<e;i++){
+        int a,b;
+        cin>>a>>b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+    
+    vector<bool>visited(n+1,0);
+    int curr = 0;
+    queue<int> q;
+    q.push(curr);
+    vector<int> dist(n,0);
+    visited[curr] =1;
+    dist[curr] = 0;
+    while(!q.empty()){
+        int temp  = q.front();
+        q.pop();
+        
+        for(auto j: adj[temp]){
+            if(!visited[j]){
+                dist[j] = dist[temp] +1;
+                visited[j]=1;
+                q.push(j);
+            }
+        }
+    }
+    for(int i=0;i<n;i++){
+        cout<<dist[i]<<" ";
+    }
+}

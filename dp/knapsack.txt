@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+#define ll long long int
+
+using namespace std;
+
+int knapsack(int i,int w[], int val[],int n,int weight,vector<vector<int>>dp){
+    
+    if(i==n || weight==0) return 0;
+    
+    if(dp[i][weight]!=-1) return dp[i][weight];
+    
+    if(w[i]>weight) return dp[i][weight]=knapsack(i+1,w,val,n,weight,dp);
+    else{
+        int left =val[i] + knapsack(i+1,w,val,n,weight-w[i],dp);
+        int right = knapsack(i+1,w,val,n,weight,dp);
+        dp[i][weight] = max(left,right);
+        return dp[i][weight];
+    }
+}
+
+int main(){
+    int w[]={25,25,30};
+    int val[] = {100,100,180};
+    int n=3;
+    int weight=50;
+    vector<vector<int>>dp(n,vector<int>(weight+1,-1));
+    cout<<knapsack(0,w,val,n,weight,dp);
+}
